@@ -1,3 +1,5 @@
+// NOTE: this file must be include with defer to use the inner HTML
+
 class MacMenu extends HTMLElement {
   
     constructor(imgs=[]) {
@@ -10,21 +12,26 @@ class MacMenu extends HTMLElement {
         div.appendChild(ul);
 
         for (let img of Database.getImgs()){
-            let li = document.createElement('li');
-            ul.appendChild(li);
-            let span = document.createElement('span');
-            li.appendChild(span);
-            span.textContent = img.title;
-
-            let href = document.createElement('a');
-            li.appendChild(href);
-            href.setAttribute('href','#');
-            let imgDiv = document.createElement('img');
-            href.appendChild(imgDiv);
-            imgDiv.setAttribute('src',img.src);
+            this.#addImg(ul,img);
         }
             
     }
+
+    #addImg(rootDiv,img){
+        let li = document.createElement('li');
+        rootDiv.appendChild(li);
+        let span = document.createElement('span');
+        li.appendChild(span);
+        span.textContent = img.title;
+
+        let href = document.createElement('a');
+        li.appendChild(href);
+        href.setAttribute('href','#');
+        let imgDiv = document.createElement('img');
+        href.appendChild(imgDiv);
+        imgDiv.setAttribute('src',img.src);
+    }
+
   }
 
   class Database {
