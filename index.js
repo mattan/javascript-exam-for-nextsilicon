@@ -4,7 +4,7 @@
 
 class MacMenu extends HTMLElement {
   
-    constructor(imgs=[]) {
+    constructor() {
         super();
         const shadow = this.attachShadow({mode: 'open'});
         shadow.appendChild(this.#getStyle());
