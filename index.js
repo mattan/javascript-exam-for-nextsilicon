@@ -1,11 +1,14 @@
 // NOTE: this file must be include with defer to use the inner HTML
 
+//import {FanAnimation} from './fan-animation.js';
+
 class MacMenu extends HTMLElement {
   
     constructor(imgs=[]) {
         super();
         const shadow = this.attachShadow({mode: 'open'});
         shadow.appendChild(this.#getStyle());
+        shadow.appendChild(FanAnimation.getStyle());
         const div = document.createElement('div');
         shadow.appendChild(div);
         div.setAttribute('id','main');
@@ -27,6 +30,7 @@ class MacMenu extends HTMLElement {
 
         let href = document.createElement('a');
         li.appendChild(href);
+        FanAnimation.add(li,img.n);
         href.setAttribute('href','#');
         let imgDiv = document.createElement('img');
         href.appendChild(imgDiv);
@@ -36,7 +40,8 @@ class MacMenu extends HTMLElement {
     #divToImg(macIconDiv){
         return {
             src:macIconDiv.getAttribute("src"),
-            title:macIconDiv.innerText
+            title:macIconDiv.innerText,
+            n:macIconDiv.getAttribute("fan-n")
         }
     }
 
@@ -79,15 +84,15 @@ class MacMenu extends HTMLElement {
             width: 64px;
             height: 64px;
             transition: all 0.3s;
-            -webkit-transform-origin: 50% 100%;
+            ransform-origin: 50% 100%;
             }
             #main li:hover img { 
-            -webkit-transform: scale(2);
+            transform: scale(2);
             margin: 0 2em;
             }
             #main li:hover + li img,
             #main li.prev img {
-            -webkit-transform: scale(1.5);
+            transform: scale(1.5);
             margin: 0 1.5em;
             }
             
