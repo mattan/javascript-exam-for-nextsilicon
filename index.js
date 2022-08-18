@@ -102,6 +102,7 @@ class MacMenu extends HTMLElement {
             }
             
             #main li span {
+                transform: scale(1);
                 white-space: nowrap;
                 display: none;
                 position: absolute;
