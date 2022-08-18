@@ -4,7 +4,7 @@
 
 class MacMenu extends HTMLElement {
   
-    constructor() {
+    constructor(imgs=[]) {
         super();
         const shadow = this.attachShadow({mode: 'open'});
         shadow.appendChild(this.#getStyle());
@@ -25,12 +25,14 @@ class MacMenu extends HTMLElement {
         let li = document.createElement('li');
         rootDiv.appendChild(li);
         let span = document.createElement('span');
-        li.appendChild(span);
+        if (img.title){
+            li.appendChild(span);
+        }
         span.textContent = img.title;
 
         let href = document.createElement('a');
         li.appendChild(href);
-        FanAnimation.add(li,img.n);
+        FanAnimation.add(li,img.fanData);
         href.setAttribute('href','#');
         let imgDiv = document.createElement('img');
         href.appendChild(imgDiv);
@@ -40,8 +42,11 @@ class MacMenu extends HTMLElement {
     #divToImg(macIconDiv){
         return {
             src:macIconDiv.getAttribute("src"),
-            title:macIconDiv.innerText,
-            n:macIconDiv.getAttribute("fan-n")
+            title:macIconDiv.getAttribute("title"),
+            fanData:[...macIconDiv.children].map(child=>({
+                src:child.getAttribute("src"),
+                title:child.getAttribute("title")
+            })) //REMINDER: The exsta bracket is mandatory do not remove it
         }
     }
 
