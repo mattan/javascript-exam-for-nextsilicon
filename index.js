@@ -3,6 +3,9 @@
 //import {FanAnimation} from './fan-animation.js';
 
 class MacMenu extends HTMLElement {
+
+    // Currying function will be helpful to handle onclick event
+    curry = (f,...args)=>()=>f(...args);
   
     constructor(imgs=[]) {
         super();
@@ -33,6 +36,7 @@ class MacMenu extends HTMLElement {
         let href = document.createElement('a');
         li.appendChild(href);
         FanAnimation.add(li,img.fanData);
+        li.onclick=this.curry(FanAnimation.open,li);
         href.setAttribute('href','#');
         let imgDiv = document.createElement('img');
         href.appendChild(imgDiv);

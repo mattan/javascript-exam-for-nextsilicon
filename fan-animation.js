@@ -7,10 +7,26 @@
         for (let [i,img] of imgs.entries()){
             let div = document.createElement('div');
             div.setAttribute('class','fan');
-            div.setAttribute('style',`transform: rotate(${i*3}deg) translate(-${i*20+200}px,-${i*75+200}px)`);
-            this.#addImg(div,img);
+            div.setAttribute('style',`transform: rotate(0deg) translate(-200px,-100px)`);
+            FanAnimation.#addImg(div,img);
             MainDiv.appendChild(div);
         }
+    }
+
+    static open(MainDiv){
+        if (MainDiv.hasAttribute('isOpen')){
+            for (let [i,div] of [...MainDiv.children].slice(2).entries()){
+                div.setAttribute('style',`transform: rotate(0deg) translate(-200px,-100px);visibility: hidden;`);
+            }
+            MainDiv.removeAttribute('isOpen');
+        }
+        else{
+            for (let [i,div] of [...MainDiv.children].slice(2).entries()){
+                div.setAttribute('style',`transform: rotate(${i*3}deg) translate(-${i*20+200}px,-${i*75+200}px);visibility: visible;`);
+            }
+            MainDiv.setAttribute('isOpen','');
+        }
+
     }
 
     static #addImg(rootDiv,img){
@@ -52,7 +68,7 @@
                 border-radius: 25%;
             }
             li:hover .fan{
-                visibility: visible;
+                
                 z-index: -1;
                 
             }
